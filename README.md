@@ -14,7 +14,7 @@ Two states, one diff.
 
 **Current-state** is the partial twin of what is actually implemented. Sensors fill it in by driving model properties from real sources. A sensor's contract and configuration are themselves elements of the model: what it observes, how it is aimed, and what lies outside its coverage. Every reading carries the observation, the time, and the coverage, so a missing fact can be told apart from a stale or silent connector.
 
-The connector set is small and bound to stable specifications (git, Zarf, UDS, and the other sources in [scope](#scope)). Modeling the contract next to the system it observes is what keeps that set manageable: a change in what a sensor claims is a change in the model, visible in the same diff as everything else.
+The connector set is small and bound to stable specifications. The inventory is under [Connectors](#connectors). Modeling the contract next to the system it observes is what keeps that set manageable: a change in what a sensor claims is a change in the model, visible in the same diff as everything else.
 
 **The diff** is the work. Goal-state against current-state yields what is unsatisfied, what has drifted, and the impact of a change. Update an interface and the model shows every place that interface is required, which of those places the sensors still see the old shape, and which open proposals already touch them.
 
