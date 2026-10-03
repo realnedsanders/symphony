@@ -1,0 +1,26 @@
+{
+  "apiVersion": "v1",
+  "kind": "List",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "metadata": {
+        "name": "ingest",
+        "namespace": "data",
+        "labels": {"symphony.io/subject": "ingest.input"}
+      },
+      "data": {"shape": "v1"}
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "ConfigMap",
+      "metadata": {
+        "name": "serve",
+        "namespace": "data",
+        "labels": {"symphony.io/subject": "serve.input"}
+      },
+      "data": {"shape": "v2"}
+    }
+  ]
+}

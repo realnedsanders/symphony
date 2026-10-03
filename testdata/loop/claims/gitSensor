@@ -1,0 +1,4 @@
+subject=gitSensor
+observes=git
+aim=testdata/loop
+outside=commit message bodies

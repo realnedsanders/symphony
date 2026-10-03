@@ -1,0 +1,9 @@
+kind: ZarfPackageConfig
+metadata:
+  name: platform-bundle
+components:
+  - name: catalog
+    manifests:
+      - name: catalog
+        files:
+          - manifests/catalog.yaml

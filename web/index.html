@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Symphony</title>
+  <style>
+    body { font-family: sans-serif; margin: 2rem; color: #1c1c1c; }
+    section { border-top: 1px solid #ccc; margin-top: 1.5rem; padding-top: 1rem; }
+    label { display: block; margin: 0.4rem 0; }
+    output, pre { display: block; background: #f4f4f4; padding: 0.6rem; white-space: pre-wrap; }
+  </style>
+</head>
+<body>
+  <h1>Symphony</h1>
+
+  <section id="goal">
+    <h2>Goal-state</h2>
+    <form id="goal-form">
+      <label>Part <input name="part" required></label>
+      <label>Owner <input name="owner" value="platform"></label>
+      <label>Interface <input name="interface" value="DataContract"></label>
+      <label>Shape <input name="shape" value="v2"></label>
+      <label>Config key <input name="configKey" value="replicas"></label>
+      <label>Config value <input name="configValue" value="2"></label>
+      <label>Decision <input name="decisionName" value="keepShape"></label>
+      <label>About <input name="decisionAbout" value="DataContract"></label>
+      <label>Choice <input name="decisionChoice" value="v2"></label>
+      <label>Alternative <input name="decisionAlternative" value="v3"></label>
+      <label>Rationale <input name="decisionRationale" value="consumers cannot migrate"></label>
+      <label>Sensor <input name="sensorName" value="gitSensor"></label>
+      <label>Observes <input name="sensorObserves" value="git"></label>
+      <label>Aim <input name="sensorAim" value="repos"></label>
+      <label>Outside coverage <input name="sensorOutside" value="commit bodies"></label>
+      <button type="submit">Save goal</button>
+    </form>
+    <pre id="goal-state">No goal yet.</pre>
+  </section>
+
+  <section id="grooming">
+    <h2>Grooming</h2>
+    <form id="groom-form">
+      <label>Gap <input name="id" value="gapAnalytics" required></label>
+      <label>Subject <input name="subject" value="analytics"></label>
+      <label>Summary <input name="summary" value="no observation"></label>
+      <label>Priority <input name="priority" type="number" value="2"></label>
+      <button type="submit">Add gap</button>
+    </form>
+    <pre id="groom-state">No gaps yet.</pre>
+  </section>
+
+  <section id="standup">
+    <h2>Standup</h2>
+    <form id="standup-form">
+      <label>Blocker <input name="blocker" required></label>
+      <button type="submit">Record standup</button>
+    </form>
+    <pre id="standup-state">No standup yet.</pre>
+  </section>
+
+  <section id="retro">
+    <h2>Retro</h2>
+    <form id="retro-form">
+      <button type="submit">Record retro</button>
+    </form>
+    <pre id="retro-state">No retro yet.</pre>
+  </section>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

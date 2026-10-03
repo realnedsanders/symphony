@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog
+  namespace: data
+  labels:
+    symphony.io/subject: catalog
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: catalog
+          image: catalog:1
