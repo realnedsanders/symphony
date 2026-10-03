@@ -1,73 +1,91 @@
 # Symphony
 
-An open toolchain for distributed multi-agent, multi-stakeholder systems development and formalization
+An open toolchain for distributed multi-agent, multi-stakeholder systems development and formalization.
 
----
+Symphony reduces the cognitive load of iteratively building deep technical systems across stakeholder roles, and keeps the interconnections between components explicit. People and agents share one model of the system. The work to be done is the difference between the system they are building toward and the system the sensors can see.
 
-Symphony aims to reduce the cognitive complexity of iteratively developing deep technical computer-based systems, spanning stakeholder roles and tracking deep interconnections between disparate system components.
-Stakeholders (ai agents, users, engineers, managers, leaders, etc) collaboratively build system specifications (the "goal-state") in SysMLv2.
-Chosen and rejected paths are captured in this model, with rationale for each.
-Collaboration is enabled via tracking the goal-state in git: proposals branch like PRs, agents can test theories/fitment in isolated worktrees, and conflicting changes can be intelligently captured and resolved.
-The partial twin of this is what's actually been implemented (the "current-state"), which is completely driven by "sensors": connectors that drive the state of the model through data -- properties of the actual system.
-The "current-state" always has the most up-to-date information (of what's available), and can be diff'ed against the desired state to determine what must be done (or what direction must be explored) to move towards the goal-state.
+Design stage: this repository holds the intent of the toolchain.
 
-## Inspiration
+## The model
 
-[github.com/Weber-GeoML/Choir](https://github.com/Weber-GeoML/Choir) (mathematics focused)
+Two states, one diff.
 
-## What
+**Goal-state** is the specification stakeholders are building toward. Structure, interfaces, configuration, ownership, and decisions all live here. Chosen paths and rejected paths are both kept, with the rationale for each. The persisted form is SysML v2, held in git. Agents and the web UI are the readers and writers of that notation.
 
-- Combines inspiration from tools like GitHub Issues/Pull Requests, Linear/Jira ticket tracking, Canva/Miro, and Cameo/system modeling tools.
-- Enables fast, high fidelity tracking of workstreams within a larger overall system/project, at customizable levels of granularity and along customizable axes.
-- Shows exactly what and where things break under certain conditions (i.e. code dependency A was updated with a different interface, shows all areas where that interface needs changed in the system).
+**Current-state** is the partial twin of what is actually implemented. Sensors fill it in by driving model properties from real sources. A sensor's contract and configuration are themselves elements of the model: what it observes, how it is aimed, and what lies outside its coverage. Every reading carries the observation, the time, and the coverage, so a missing fact can be told apart from a stale or silent connector.
 
-## How
+The connector set is small and bound to stable specifications (git, Zarf, UDS, and the other sources in [scope](#scope)). Modeling the contract next to the system it observes is what keeps that set manageable: a change in what a sensor claims is a change in the model, visible in the same diff as everything else.
 
-- Create spec
-- Define sensor sources (repos/connections between repos, ???)
-- system generates current-state model (or empty)
-- 
+**The diff** is the work. Goal-state against current-state yields what is unsatisfied, what has drifted, and the impact of a change. Update an interface and the model shows every place that interface is required, which of those places the sensors still see the old shape, and which open proposals already touch them.
+
+## Collaboration
+
+The goal-state is tracked in git, across the many repositories of the system.
+
+- Proposals are branches.
+- Agents test fitment in isolated worktrees.
+- When proposals conflict, Symphony captures the clash in model terms: the elements in dispute, the rationales already recorded, and the sensor readings that bear on them. Resolution happens on that record.
+- An accepted proposal updates the goal-state. A rejected alternative stays on the elements it concerns, with the rationale.
+
+## Surfaces
+
+The web UI is where humans work. It captures and displays the ceremonies the team already runs, and the model is what makes those views more than a board.
+
+- **Backlog grooming.** Gaps from the diff, decomposed and prioritized, at the granularity the work needs: a capability, a component, or a single interface change.
+- **Standup.** What current-state and the open proposals have done since last time, and what is blocked.
+- **Retro.** What shipped, what was rejected, and why.
+
+The same model supports views the board cannot. Slices run along axes the team chooses: component, workstream, owner, environment, capability. Diagrams export to Mermaid, PNG, and PDF. A Wardley view is available when the question is evolution and visibility.
+
+### Agents
+
+Agents collaborate on the goal-state, take gaps from the diff, and test proposals in worktrees. Surfaces: an API, an MCP server, and agent skills. Day to day this is the harness an engineer already runs (Grok Build, Claude Code, Codex, Pi, and others): feature implementation, gap decomposition, and fitment against the model.
+
+### Managers
+
+Managers see gaps grouped by workstream, what each is blocked by, and which proposals are moving. Grooming and standup are this view, backed by sensor evidence.
+
+### Leaders
+
+Leaders see capability coverage: which goals have no sensor, which running elements have no owner, and where goal-state and the delivered system have diverged above the level of a single workstream.
 
 ## Scope
 
 ### Tools
 
-supported tools:
+- SysML v2, as the internal representation
+- git for state tracking
+- Go, for the toolchain
+- typescript for the web ui
 
-- Golang
-- SysML v2
-- zarf
-- Defense Unicorns UDS
-- git (many repos)
+### Connectors
 
-### Usage Modes
+What connectors we build
 
-#### AI Agents
+- Go as a language (go code -> SysML v2)
+- Git, across many repositories
+- Linux container images (cgroups v2 based, docker/podman/containerd/etc)
+- Kubernetes manifests
+- Helm charts
+- [Zarf](https://github.com/zarf-dev/zarf) and [Defense Unicorns UDS](https://github.com/defenseunicorns/uds)
+- Kubernetes (live cluster)
 
-- API
-- MCP Server
-- Agent Skills
-- ???
+Notes on Zarf and UDS: 
 
-#### Humans
+> Zarf and UDS are how configuration is packaged and propagated, including into airgapped environments.
+> A package keeps its shape from the description in the goal-state, through the artifact that moves, to the configuration a sensor reads where it lands.
+> That preserved structure is why they sit in the core, next to git: the goal and the delivery share a form the model can follow.
 
-- web-based visualizations 
-    - export diagrams to mermaid/PNG/PDF
-    - progress tracking
-    - gaps prioritization
-    - Multiple views/axes for system visualization. Wardley map too?
+## Operating loop
 
+1. Describe the goal-state through the UI or an agent. It is stored as SysML v2 in git.
+2. Declare sensor contracts and their configuration as part of that model.
+3. Sensors project the connected sources into current-state. Each reading is stamped with time and coverage.
+4. The diff produces gaps, drifts, and impact.
+5. Grooming prioritizes and decomposes gaps. Agents and engineers take them as branches and test fitment in worktrees.
+6. Conflicts are captured on the elements, rationales, and readings involved, and resolved there.
+7. Accepted work updates the goal-state. Rejected alternatives remain, with rationale. Standup and retro read and write that record.
 
-##### Engineers
+## Inspiration
 
-- AI agent interface (Claude Code, Codex, Pi, Prime-Agent, etc)
-    - collaborate on feature implementation, gap decomposition, 
-
-##### Managers
-
-- ???
-
-
-##### Leaders
-
-- ???
+[Choir](https://github.com/Weber-GeoML/Choir) is an open protocol for distributed multi-agent formalization. Symphony takes the working arrangement: a shared formal artifact, tasks derived from what is missing, contributors using their own agents, and a durable record of what was accepted and why. Sensor evidence against the model, with coverage attached, is the check on a proposal.
