@@ -4,7 +4,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/realnedsanders/symphony/src/internal/model"
+	"symphony/internal/model"
 )
 
 // Compare diffs goal against sensor readings and open proposals.

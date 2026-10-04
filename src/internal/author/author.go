@@ -5,8 +5,8 @@ package author
 import (
 	"context"
 
-	"github.com/realnedsanders/symphony/src/internal/model"
-	"github.com/realnedsanders/symphony/src/internal/store"
+	"symphony/internal/model"
+	"symphony/internal/store"
 )
 
 // Apply stores goal as SysML v2 in git and returns the commit id.

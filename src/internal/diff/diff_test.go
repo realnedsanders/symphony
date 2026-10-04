@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/realnedsanders/symphony/src/internal/diff"
-	"github.com/realnedsanders/symphony/src/internal/model"
+	"symphony/internal/diff"
+	"symphony/internal/model"
 )
 
 func TestDiffImpactAndContract(t *testing.T) {

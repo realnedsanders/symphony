@@ -5,11 +5,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/realnedsanders/symphony/src/internal/author"
-	"github.com/realnedsanders/symphony/src/internal/ceremony"
-	"github.com/realnedsanders/symphony/src/internal/collab"
-	"github.com/realnedsanders/symphony/src/internal/model"
-	"github.com/realnedsanders/symphony/src/internal/store"
+	"symphony/internal/author"
+	"symphony/internal/ceremony"
+	"symphony/internal/collab"
+	"symphony/internal/model"
+	"symphony/internal/store"
 )
 
 func TestAcceptRejectStandupRetro(t *testing.T) {

@@ -3,10 +3,9 @@
 FROM golang:1.26-alpine AS build
 
 WORKDIR /src
-COPY go.mod go.sum ./
+COPY . .
 RUN go mod download
-COPY . ./src
-RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" -o /out/symphony ./src/cmd/symphony
+RUN CGO_ENABLED=0 GOOS=linux go build -trimpath -ldflags="-s -w" -o /out/symphony ./cmd/symphony
 
 RUN set -eu; \
     apk add --no-cache ca-certificates git; \

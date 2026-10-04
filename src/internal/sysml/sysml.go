@@ -10,7 +10,7 @@ import (
 	"sync"
 
 	"github.com/Open-MBEE/OpenSysML/client/opensysml"
-	"github.com/realnedsanders/symphony/src/internal/model"
+	"symphony/internal/model"
 )
 
 const (

@@ -4,11 +4,11 @@ import (
 	"context"
 	"testing"
 
-	"github.com/realnedsanders/symphony/src/internal/author"
-	"github.com/realnedsanders/symphony/src/internal/collab"
-	"github.com/realnedsanders/symphony/src/internal/gitx"
-	"github.com/realnedsanders/symphony/src/internal/model"
-	"github.com/realnedsanders/symphony/src/internal/store"
+	"symphony/internal/author"
+	"symphony/internal/collab"
+	"symphony/internal/gitx"
+	"symphony/internal/model"
+	"symphony/internal/store"
 )
 
 func TestGroomTakeAndResolve(t *testing.T) {

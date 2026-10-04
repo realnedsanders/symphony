@@ -8,9 +8,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/realnedsanders/symphony/src/internal/gitx"
-	"github.com/realnedsanders/symphony/src/internal/model"
-	"github.com/realnedsanders/symphony/src/internal/sysml"
+	"symphony/internal/gitx"
+	"symphony/internal/model"
+	"symphony/internal/sysml"
 )
 
 const (

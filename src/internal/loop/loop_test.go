@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/realnedsanders/symphony/src/internal/loop"
+	"symphony/internal/loop"
 )
 
 func TestLoopTwice(t *testing.T) {

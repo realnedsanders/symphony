@@ -9,9 +9,9 @@ import (
 	"path/filepath"
 	"sort"
 
-	"github.com/realnedsanders/symphony/src/internal/gitx"
-	"github.com/realnedsanders/symphony/src/internal/model"
-	"github.com/realnedsanders/symphony/src/internal/store"
+	"symphony/internal/gitx"
+	"symphony/internal/model"
+	"symphony/internal/store"
 )
 
 // AddGap records a gap on the collaboration model.

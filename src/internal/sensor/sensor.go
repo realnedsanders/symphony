@@ -17,8 +17,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/realnedsanders/symphony/src/internal/gitx"
-	"github.com/realnedsanders/symphony/src/internal/model"
+	"symphony/internal/gitx"
+	"symphony/internal/model"
 	"gopkg.in/yaml.v3"
 )
 

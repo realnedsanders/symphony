@@ -10,11 +10,11 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/realnedsanders/symphony/src/internal/diff"
-	"github.com/realnedsanders/symphony/src/internal/gitx"
-	"github.com/realnedsanders/symphony/src/internal/model"
-	"github.com/realnedsanders/symphony/src/internal/sensor"
-	"github.com/realnedsanders/symphony/src/internal/sysml"
+	"symphony/internal/diff"
+	"symphony/internal/gitx"
+	"symphony/internal/model"
+	"symphony/internal/sensor"
+	"symphony/internal/sysml"
 )
 
 // Now is the clock the fixture loop observes with, so two runs share a diff.

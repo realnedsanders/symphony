@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/realnedsanders/symphony/src/internal/gitx"
-	"github.com/realnedsanders/symphony/src/internal/model"
-	"github.com/realnedsanders/symphony/src/internal/store"
+	"symphony/internal/gitx"
+	"symphony/internal/model"
+	"symphony/internal/store"
 )
 
 // Accept merges a proposal branch into the goal-state and marks it accepted.

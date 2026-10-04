@@ -10,11 +10,11 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/realnedsanders/symphony/src/internal/author"
-	"github.com/realnedsanders/symphony/src/internal/httpapi"
-	"github.com/realnedsanders/symphony/src/internal/model"
-	"github.com/realnedsanders/symphony/src/internal/store"
-	"github.com/realnedsanders/symphony/src/internal/sysml"
+	"symphony/internal/author"
+	"symphony/internal/httpapi"
+	"symphony/internal/model"
+	"symphony/internal/store"
+	"symphony/internal/sysml"
 )
 
 func TestAuthoringRoundTrip(t *testing.T) {

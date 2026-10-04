@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/realnedsanders/symphony/src/internal/diff"
-	"github.com/realnedsanders/symphony/src/internal/gitx"
-	"github.com/realnedsanders/symphony/src/internal/model"
-	"github.com/realnedsanders/symphony/src/internal/sensor"
+	"symphony/internal/diff"
+	"symphony/internal/gitx"
+	"symphony/internal/model"
+	"symphony/internal/sensor"
 )
 
 func TestSensors(t *testing.T) {

@@ -9,10 +9,10 @@ import (
 	"os"
 	"time"
 
-	"github.com/realnedsanders/symphony/src/internal/author"
-	"github.com/realnedsanders/symphony/src/internal/httpapi"
-	"github.com/realnedsanders/symphony/src/internal/loop"
-	"github.com/realnedsanders/symphony/src/internal/model"
+	"symphony/internal/author"
+	"symphony/internal/httpapi"
+	"symphony/internal/loop"
+	"symphony/internal/model"
 )
 
 func main() {
