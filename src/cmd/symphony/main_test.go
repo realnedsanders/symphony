@@ -15,7 +15,7 @@ func TestEntryPointTwice(t *testing.T) {
 	if out, err := build.CombinedOutput(); err != nil {
 		t.Fatalf("build: %s: %v", out, err)
 	}
-	fixture := filepath.Join("..", "..", "..", "testdata", "loop")
+	fixture := filepath.Join("..", "..", "testdata", "loop")
 	first := executeLoop(t, bin, fixture)
 	second := executeLoop(t, bin, fixture)
 	if first != second {

@@ -1,2 +1,4 @@
 zarf-package-*
 uds-bundle-*
+build/
+src/coverage.out

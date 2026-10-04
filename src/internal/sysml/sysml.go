@@ -9,8 +9,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/Open-MBEE/OpenSysML/client/opensysml"
 	"symphony/internal/model"
+
+	"github.com/Open-MBEE/OpenSysML/client/opensysml"
 )
 
 const (
