@@ -1,0 +1,6 @@
+apiVersion: v2
+name: symphony
+description: Symphony goal-state, current-state, and the diff as the work
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

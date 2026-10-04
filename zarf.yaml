@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/zarf-dev/zarf/main/zarf.schema.json
+kind: ZarfPackageConfig
+metadata:
+  name: symphony
+  description: Symphony operating loop
+  version: 0.1.0
+  annotations:
+    dev.uds.title: Symphony
+    dev.uds.tagline: The diff between goal-state and what sensors can see
+    dev.uds.categories: developer-tools
+    dev.uds.keywords: sysml,git,kubernetes
+
+variables:
+  - name: DOMAIN
+    default: uds.dev
+
+components:
+  - name: symphony
+    required: true
+    description: Deploy Symphony
+    import:
+      path: common
+    images:
+      - ghcr.io/realnedsanders/symphony:0.1.0
