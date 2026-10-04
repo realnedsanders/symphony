@@ -10,7 +10,7 @@ on:
   pull_request:
     types: [milestoned, opened, reopened, synchronize]
     paths:
-      - ".github/container-and-chart/**"
+      - "src/**"
 
 jobs:
   verify-test:

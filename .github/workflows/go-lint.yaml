@@ -8,8 +8,7 @@ on:
     branches: [main]
     types: [opened, reopened, synchronize]
     paths:
-      - ".github/container-and-chart/docker/**"
-      - ".github/container-and-chart/.golangci.yaml"
+      - "src/**"
       - ".github/workflows/go-lint.yaml"
 
 permissions:
@@ -30,8 +29,8 @@ jobs:
         # renovate: datasource=github-tags depName=actions/setup-go versioning=semver
         uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
         with:
-          go-version-file: .github/container-and-chart/docker/go.mod
-          cache-dependency-path: .github/container-and-chart/docker/go.sum
+          go-version-file: src/go.mod
+          cache-dependency-path: src/go.sum
 
       - name: golangci-lint
         # renovate: datasource=github-tags depName=golangci/golangci-lint-action versioning=semver
@@ -39,5 +38,5 @@ jobs:
         with:
           # renovate: datasource=github-tags depName=golangci/golangci-lint versioning=semver
           version: v2.13.2
-          working-directory: .github/container-and-chart/docker
-          args: --config=../.golangci.yaml
+          working-directory: src
+          args: --config=.golangci.yaml
