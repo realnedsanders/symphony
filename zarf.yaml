@@ -3,7 +3,7 @@ kind: ZarfPackageConfig
 metadata:
   name: symphony
   description: Symphony operating loop
-  version: 0.1.0
+  version: dev
   annotations:
     dev.uds.title: Symphony
     dev.uds.tagline: The diff between goal-state and what sensors can see
@@ -17,6 +17,8 @@ variables:
 components:
   - name: symphony
     required: true
+    only:
+      flavor: upstream
     description: Deploy Symphony
     import:
       path: common

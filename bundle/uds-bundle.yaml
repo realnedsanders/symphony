@@ -2,9 +2,9 @@ kind: UDSBundle
 metadata:
   name: symphony
   description: Deploy Symphony on a UDS cluster
-  version: 0.1.0
+  version: dev
 
 packages:
   - name: symphony
     path: ../
-    ref: 0.1.0
+    ref: dev
