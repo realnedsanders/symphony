@@ -7,6 +7,8 @@ variables:
     default: "v1.54.0"
   - name: GRYPE_VERSION
     default: "v0.120.0"
+  - name: IMAGE_TAG
+    default: "dev"
 tasks:
   - name: default
     actions:
@@ -61,14 +63,21 @@ tasks:
       - cmd: CGO_ENABLED=1 go test -race -failfast ./...
         dir: src
 
+  - name: set-image-tag
+    actions:
+      - cmd: yq '.flavors[] | select(.name == "upstream") | .version | split("-") | .[0]' releaser.yaml
+        setVariables:
+          - name: IMAGE_TAG
+
   - name: build
     description: Build the container
     actions:
-      # - cmd: docker buildx build --platform "linux/arm64,linux/amd64" --load --tag "zarf.internal/symphony:dev" .
-      - cmd: docker buildx build --platform "linux/amd64" --load --tag "zarf.internal/symphony:dev" .
+      - task: set-image-tag
+        # - cmd: docker buildx build --platform "linux/arm64,linux/amd64" --load --tag "ghcr.io/realnedsanders/symphony:$IMAGE_TAG" .
+      - cmd: docker buildx build --platform "linux/amd64" --load --tag "ghcr.io/realnedsanders/symphony:$IMAGE_TAG" .
         dir: src
       - cmd: mkdir -p build
-      - cmd: docker save "zarf.internal/symphony:dev" --output build/symphony.tar
+      - cmd: docker save "ghcr.io/realnedsanders/symphony:$IMAGE_TAG" --output build/symphony.tar
 
   - name: scan
     description: Run scanners
@@ -92,4 +101,3 @@ tasks:
     description: Run grype
     actions:
       - cmd: docker run -v "${PWD}/build:/build" -w "/build" anchore/grype:${GRYPE_VERSION} symphony.tar -o table -o json=symphony.scan.json
-
