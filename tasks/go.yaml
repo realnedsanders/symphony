@@ -9,6 +9,9 @@ variables:
     default: "v0.120.0"
   - name: IMAGE_TAG
     default: "dev"
+  - name: GO_IMAGE
+    default: "golang:1.26-alpine"
+
 tasks:
   - name: default
     actions:
@@ -73,8 +76,9 @@ tasks:
     description: Build the container
     actions:
       - task: set-image-tag
+      - task: go-image
         # - cmd: docker buildx build --platform "linux/arm64,linux/amd64" --load --tag "ghcr.io/realnedsanders/symphony:$IMAGE_TAG" .
-      - cmd: docker buildx build --platform "linux/amd64" --load --tag "ghcr.io/realnedsanders/symphony:$IMAGE_TAG" .
+      - cmd: docker buildx build --build-arg GO_IMAGE=${GO_IMAGE} --platform "linux/amd64" --load --tag "ghcr.io/realnedsanders/symphony:$IMAGE_TAG" .
         dir: src
       - cmd: mkdir -p build
       - cmd: docker save "ghcr.io/realnedsanders/symphony:$IMAGE_TAG" --output build/symphony-$IMAGE_TAG.tar
@@ -87,9 +91,10 @@ tasks:
       - task: grype
 
   - name: govulncheck
-    description: Run govulncheck
+    description: Run govulncheck in the Dockerfile Go image
     actions:
-      - cmd: go run golang.org/x/vuln/cmd/govulncheck@latest ./...
+      - task: go-image
+      - cmd: docker run --rm -v "${PWD}:/src" -w /src ${GO_IMAGE} go run golang.org/x/vuln/cmd/govulncheck@latest ./...
         dir: src
 
   - name: syft

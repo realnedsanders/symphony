@@ -1,6 +1,7 @@
 # Multi-stage build. The Go binary is static. Git is copied out of Alpine
 # with its musl libraries so the scratch image can still init a workspace.
-FROM golang:1.26-alpine AS build
+ARG GO_IMAGE=golang:1.26-alpine
+FROM ${GO_IMAGE} AS build
 
 WORKDIR /src
 COPY . .
