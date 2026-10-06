@@ -29,7 +29,8 @@ spec:
             - -web
             - /web
             - -workspace
-            - /data
+            # emptyDir is owned by root. Git rejects that, so the repo lives in a directory this process creates.
+            - /data/workspace
           ports:
             - name: http
               containerPort: 8080
