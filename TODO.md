@@ -10,5 +10,5 @@
 - [ ] logging, metrics
 - [ ] harden connectors, add more?
 - [ ] figure out where grok took shortcuts
-- [ ] fix pod startup issue: pod not ready, crashloopbackoff, log entry: `git config user.email symphony@local: fatal: not in a git directory: exit status 12`
+- [X] fix pod startup issue: pod not ready, crashloopbackoff, log entry: `git config user.email symphony@local: fatal: not in a git directory: exit status 12`
 - [ ] refactor to use cobra/viper for golang cli/config
