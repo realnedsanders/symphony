@@ -4,4 +4,4 @@
 flavors:
   - name: upstream
     # renovate-uds: datasource=docker depName=ghcr.io/realnedsanders/symphony/container/symphony
-    version: 0.3.0-uds.0
+    version: 0.1.0-uds.0
