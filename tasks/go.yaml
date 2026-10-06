@@ -76,7 +76,6 @@ tasks:
     description: Build the container
     actions:
       - task: set-image-tag
-      - task: go-image
         # - cmd: docker buildx build --platform "linux/arm64,linux/amd64" --load --tag "ghcr.io/realnedsanders/symphony:$IMAGE_TAG" .
       - cmd: docker buildx build --build-arg GO_IMAGE=${GO_IMAGE} --platform "linux/amd64" --load --tag "ghcr.io/realnedsanders/symphony:$IMAGE_TAG" .
         dir: src
@@ -93,7 +92,6 @@ tasks:
   - name: govulncheck
     description: Run govulncheck in the Dockerfile Go image
     actions:
-      - task: go-image
       - cmd: docker run --rm -v "${PWD}:/src" -w /src ${GO_IMAGE} go run golang.org/x/vuln/cmd/govulncheck@latest ./...
         dir: src
 
