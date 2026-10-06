@@ -32,7 +32,7 @@ jobs:
       - name: Get Container Version
         id: get_version
         run: |
-          VERSION=$(yq '.flavors[] | select(.name == "upstream") | .version | split("-") | .[0]' releaser.yaml)
+          VERSION=$(yq -r '.flavors[] | select(.name == "upstream") | .version | split("-") | .[0]' releaser.yaml)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
       - name: Set up QEMU

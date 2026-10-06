@@ -65,7 +65,7 @@ tasks:
 
   - name: set-image-tag
     actions:
-      - cmd: yq '.flavors[] | select(.name == "upstream") | .version | split("-") | .[0]' releaser.yaml
+      - cmd: yq -r '.flavors[] | select(.name == "upstream") | .version | split("-") | .[0]' releaser.yaml
         setVariables:
           - name: IMAGE_TAG
 
@@ -77,7 +77,7 @@ tasks:
       - cmd: docker buildx build --platform "linux/amd64" --load --tag "ghcr.io/realnedsanders/symphony:$IMAGE_TAG" .
         dir: src
       - cmd: mkdir -p build
-      - cmd: docker save "ghcr.io/realnedsanders/symphony:$IMAGE_TAG" --output build/symphony.tar
+      - cmd: docker save "ghcr.io/realnedsanders/symphony:$IMAGE_TAG" --output build/symphony-$IMAGE_TAG.tar
 
   - name: scan
     description: Run scanners
@@ -95,9 +95,11 @@ tasks:
   - name: syft
     description: Run syft
     actions:
-      - cmd: docker run -v "${PWD}/build:/build" -w "/build" anchore/syft:${SYFT_VERSION} symphony.tar -o table -o json=symphony.sbom.json
+      - task: set-image-tag
+      - cmd: docker run -v "${PWD}/build:/build" -w "/build" anchore/syft:${SYFT_VERSION} symphony-$IMAGE_TAG.tar -o table -o json=symphony.sbom.json
 
   - name: grype
     description: Run grype
     actions:
-      - cmd: docker run -v "${PWD}/build:/build" -w "/build" anchore/grype:${GRYPE_VERSION} symphony.tar -o table -o json=symphony.scan.json
+      - task: set-image-tag
+      - cmd: docker run -v "${PWD}/build:/build" -w "/build" anchore/grype:${GRYPE_VERSION} symphony-$IMAGE_TAG.tar -o table -o json=symphony.scan.json
